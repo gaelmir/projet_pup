@@ -1,4 +1,4 @@
-function [T,Ttotal] = buildDataTableSCT(SubjectCode,DataPath)
+function [Pupil,Ttotal] = buildDataTableSCT(SubjectCode,DataPath)
 
 % Create a table with all requested information in colums, for each trial
 % (in row) 
@@ -118,10 +118,7 @@ Variables=array2table(AllTrialInfos,'VariableNames',VariablesNames(1:end));
     PeakVel2(nonEmptyIdx) = round(cellfun(@(v)v(2,1),pvelSacc(nonEmptyIdx)))';
 
     
-    sizePupilFixationCross=sizePupilFixationCross';
-    sizePupilImage=sizePupilImage';
-    sizePupilBackground=sizePupilBackground';
-    
+ 
     DataTable=table(...
         Valid,...
         NBlinks,...
@@ -149,20 +146,19 @@ Variables=array2table(AllTrialInfos,'VariableNames',VariablesNames(1:end));
         TotalAmpl2,...
         Latency2,...
         Duration2,...
-        PeakVel2,...
-        sizePupilFixationCross,...
-        sizePupilImage,...
-        sizePupilBackground...
+        PeakVel2...
         );
 
 
-
+sizePupilFixationCross=sizePupilFixationCross';
+sizePupilImage=sizePupilImage';
+sizePupilBackground=sizePupilBackground';
 
 %put everything into a bigger table:
-
+Pupil=[sizePupilFixationCross,sizePupilImage,sizePupilBackground];
 T=[Subject,Variables,DataTable];
-Ttotal=[Ttotal;T];
-%Ttotal=[Ttotal,Pupil];
+%Ttotal=[Ttotal;T];
+%Ttotal=[Ttotal;Pupil];
 
 %TTotal
 end
