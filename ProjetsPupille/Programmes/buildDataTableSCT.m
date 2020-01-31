@@ -1,4 +1,4 @@
-function Ttotal = buildDataTableSCT(SubjectCode,DataPath)
+function Ttotal = buildDataTableSCT(SubjectCode,DataPath,face) 
 
 % Create a table with all requested information in colums, for each trial
 % (in row) 
@@ -26,8 +26,11 @@ function Ttotal = buildDataTableSCT(SubjectCode,DataPath)
 % saccade accuracy
 
 
-
-ExpeVersion={'SCTv'}%,'SCTf'};
+if face==0
+    ExpeVersion={'SCTv'}%,'SCTf'};
+else
+    ExpeVersion={'SCTf'}%,'SCTv'};
+end    
 ExpeType='SCT';
 Ttotal=[];
 
