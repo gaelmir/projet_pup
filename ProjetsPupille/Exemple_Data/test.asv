@@ -73,21 +73,12 @@ Matrice_taille=Matrice{:,[34:36]};
 Vect_correct=Matrice{:,21};
 Vect_erreur=Matrice{:,22};
 
-Matrice_taille_correct=[];
-Matrice_taille_erreur=[];
+Ma
 for i=1:size(Vect_correct)
     
-    if Vect_correct(i)==1
-  
-        Matrice_taille_correct=[Matrice_taille_correct;Matrice_taille(i,:)];
-       
-    end
-    
-    if Vect_erreur(i)==1
-  
-        Matrice_taille_erreur=[Matrice_taille_erreur;Matrice_taille(i,:)];
-       
-    end
-end
+    Matrice_taille_1=Matrice_taille(2,1);
+    A=cell2mat(Matrice_taille_1);
 
-A=cell2mat(Matrice_taille_1);
+figure()
+plot(A)
+

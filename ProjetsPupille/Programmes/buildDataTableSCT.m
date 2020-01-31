@@ -1,4 +1,4 @@
-function [T,Ttotal] = buildDataTableSCT(SubjectCode,DataPath)
+function Ttotal = buildDataTableSCT(SubjectCode,DataPath)
 
 % Create a table with all requested information in colums, for each trial
 % (in row) 
