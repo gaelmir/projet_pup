@@ -1,0 +1,2 @@
+luminance moyenne des images: 0.44
+RMS contrast moyen des images: 0.25
