@@ -106,9 +106,9 @@ for i=18:18%size(Matrice_taille_erreur)
         y = filter(b,a,sizepupilimage);
 
         t = 1:length(sizepupilimage);
-        %plot(t,sizepupilimage,'--',t,y,'-')
-        %legend('Original Data','Filtered Data')
-        plot(y(4:399))
+        plot(t,x,'--',t,y,'-')
+        legend('Original Data','Filtered Data')
+        %plot(sizepupilimage)
         hold on
     end
 end
