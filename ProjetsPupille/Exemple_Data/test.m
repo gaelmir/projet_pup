@@ -68,10 +68,15 @@ close all
 % end
 % figure()
 % plot(Premiere_serie_TimeF([1:Indice_saut(1)],1),Premiere_serie_F([1:Indice_saut(1)],1))
-Matrice=buildDataTableSCT('02','C:\Users\ASUS\Desktop\gitou\projet_pup\ProjetsPupille\Exemple_Data');
-Matrice_taille=Matrice{:,[34:36]};
-Vect_correct=Matrice{:,21};
-Vect_erreur=Matrice{:,22};
+
+
+%%
+%---------------------------------PARTIE VEHICULE --------------------
+Matrice_vehicule=buildDataTableSCT('02','C:\Users\ASUS\Desktop\gitou\projet_pup\ProjetsPupille\Exemple_Data',{'SCTv'});
+
+Matrice_taille=Matrice_vehicule{:,[34:36]};
+Vect_correct=Matrice_vehicule{:,21};
+Vect_erreur=Matrice_vehicule{:,22};
 
 %On crée une table composée de l'évolution de la taille dans la pupille
 %lorsque qu'il y a erreur et une table composée de l'évolution de la taille dans la pupille
@@ -96,31 +101,35 @@ end
 %Affichage de l'évolution en cas d'erreur pour sizePupilimage et
 %sizePupilbackground
 figure()
-a = 1;
-b = [1/4 1/4 1/4 1/4];
-for i=18:18%size(Matrice_taille_erreur)
+
+for i=8:18%size(Matrice_taille_erreur)
     sizepupilimage=cell2mat(Matrice_taille_erreur(i,2));
     x=size(sizepupilimage);
     x=x(1)
     if x==399
-        y = filter(b,a,sizepupilimage);
-
-        t = 1:length(sizepupilimage);
+%       y = filter(b,a,sizepupilimage);
+%         
+        %t = 1:length(sizepupilimage);
+%         gscatter(sizepupilimage,t
+        y=smooth(sizepupilimage,10);
         %plot(t,sizepupilimage,'--',t,y,'-')
         %legend('Original Data','Filtered Data')
-        plot(y(4:399))
+        plot(y)
+        title("Evolution de la taille de la pupille (erreur + vehicule + image)")
         hold on
     end
 end
 hold off
 figure()
 
-for i=4:8%size(Matrice_taille_erreur)
+for i=8:18%size(Matrice_taille_erreur)
     sizepupilbackground=cell2mat(Matrice_taille_erreur(i,3));
     x=size(sizepupilbackground);
     x=x(1)
     if x==999
-        plot(sizepupilbackground)
+        y=smooth(sizepupilbackground,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (erreur + vehicule + écran gris)")
         hold on
     end
 end
@@ -130,24 +139,121 @@ hold off
 %sizePupilbackground
 figure()
 
-for i=8:18%size(Matrice_taille_erreur)
+for i=8:18%size(Matrice_taille_correct)
     sizepupilimage=cell2mat(Matrice_taille_correct(i,2));
     x=size(sizepupilimage);
     x=x(1)
     if x==399
-        plot(sizepupilimage)
+        y=smooth(sizepupilimage,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (correct + vehicule + image)")
         hold on
     end
 end
 hold off
 figure()
 
-for i=4:8%size(Matrice_taille_erreur)
+for i=8:18%size(Matrice_taille_correct)
     sizepupilbackground=cell2mat(Matrice_taille_correct(i,3));
     x=size(sizepupilbackground);
     x=x(1)
     if x==999
-        plot(sizepupilbackground)
+        y=smooth(sizepupilbackground,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (correct + vehicule + écran gris)")
+        hold on
+    end
+end
+hold off
+
+%%
+%%
+clear all
+%---------------------------------PARTIE FACE --------------------
+Matrice_face=buildDataTableSCT('02','C:\Users\ASUS\Desktop\gitou\projet_pup\ProjetsPupille\Exemple_Data',{'SCTf'});
+Matrice_taille=Matrice_face{:,[34:36]};
+Vect_correct=Matrice_face{:,21};
+Vect_erreur=Matrice_face{:,22};
+
+%On crée une table composée de l'évolution de la taille dans la pupille
+%lorsque qu'il y a erreur et une table composée de l'évolution de la taille dans la pupille
+%lorsque qu'il n'y a pas erreur
+Matrice_taille_correct=[];
+Matrice_taille_erreur=[];
+for i=1:size(Vect_correct)
+    
+    if Vect_correct(i)==1
+  
+        Matrice_taille_correct=[Matrice_taille_correct;Matrice_taille(i,:)];
+       
+    end
+    
+    if Vect_erreur(i)==1
+  
+        Matrice_taille_erreur=[Matrice_taille_erreur;Matrice_taille(i,:)];
+       
+    end
+end
+
+%Affichage de l'évolution en cas d'erreur pour sizePupilimage et
+%sizePupilbackground
+figure()
+
+for i=8:18%size(Matrice_taille_erreur)
+    sizepupilimage=cell2mat(Matrice_taille_erreur(i,2));
+    x=size(sizepupilimage);
+    x=x(1)
+    if x==399
+
+        y=smooth(sizepupilimage,10);
+
+        plot(y)
+        title("Evolution de la taille de la pupille (erreur + visage + image)")
+        hold on
+    end
+end
+hold off
+figure()
+
+for i=8:18%size(Matrice_taille_erreur)
+    sizepupilbackground=cell2mat(Matrice_taille_erreur(i,3));
+    x=size(sizepupilbackground);
+    x=x(1)
+    if x==999
+        y=smooth(sizepupilbackground,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (erreur + visage + écran gris)")
+        hold on
+    end
+end
+hold off
+
+%Affichage de l'évolution en cas de correct pour sizePupilimage et
+%sizePupilbackground
+figure()
+
+for i=8:18%size(Matrice_taille_correct)
+    sizepupilimage=cell2mat(Matrice_taille_correct(i,2));
+    x=size(sizepupilimage);
+    x=x(1)
+    if x==399
+        y=smooth(sizepupilimage,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (correct + visage + image)")
+        hold on
+    end
+end
+hold off
+figure()
+
+for i=8:18%size(Matrice_taille_correct)
+    sizepupilbackground=cell2mat(Matrice_taille_correct(i,3));
+    x=size(sizepupilbackground);
+    x=x(1)
+    if x==999
+        y=smooth(sizepupilbackground,10);
+        plot(y)
+        title("Evolution de la taille de la pupille (correct + visage + écran gris)")
         hold on
     end
 end

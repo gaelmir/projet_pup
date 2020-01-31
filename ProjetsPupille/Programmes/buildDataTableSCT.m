@@ -1,4 +1,4 @@
-function Ttotal = buildDataTableSCT(SubjectCode,DataPath)
+function Ttotal = buildDataTableSCT(SubjectCode,DataPath,ExpeVersion)
 
 % Create a table with all requested information in colums, for each trial
 % (in row) 
@@ -27,7 +27,7 @@ function Ttotal = buildDataTableSCT(SubjectCode,DataPath)
 
 
 
-ExpeVersion={'SCTv'}%,'SCTf'};
+%ExpeVersion={'SCTv'};
 ExpeType='SCT';
 Ttotal=[];
 
