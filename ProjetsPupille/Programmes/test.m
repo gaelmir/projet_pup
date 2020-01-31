@@ -68,7 +68,7 @@ close all
 % end
 % figure()
 % plot(Premiere_serie_TimeF([1:Indice_saut(1)],1),Premiere_serie_F([1:Indice_saut(1)],1))
-Matrice=buildDataTableSCT('02','C:\Users\ASUS\Desktop\ProjetsPupille\\Exemple_Data');
+Matrice=buildDataTableSCT('02','C:\Users\miram\Documents\IESE\IESE5\gitou\projet_pup\ProjetsPupille\Exemple_Data');
 Matrice_taille=Matrice{:,[34:36]};
 Vect_correct=Matrice{:,21};
 Vect_erreur=Matrice{:,22};
@@ -90,4 +90,4 @@ for i=1:size(Vect_correct)
     end
 end
 
-A=cell2mat(Matrice_taille_1);
+%A=cell2mat(Matrice_taille_1);
