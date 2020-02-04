@@ -10,11 +10,11 @@ function [garde_corr,moy_corr,ecart_corr,garde_err,moy_err,ecart_err]=croix_moy_
 %garde : numero des essais coservés
 
 if face ~= 0 && face ~=1
-    print("erreur")
+   "erreur"
 end
 if face==0
     %vehicule
-    Matrice=buildDataTableSCT(SubjectCode,path,0)
+    Matrice=buildDataTableSCT(SubjectCode,path,0);
     %Matrice_face=buildDataTableSCT('02','Exemple_Data',1);% matrice pour visage 
     Matrice_taille=Matrice{:,34};
 
@@ -66,7 +66,7 @@ if face==0
     moy_corr=[];
     ecart_corr=[];
     garde_corr=[];
-    tab_sizepupilimage_corr_cross=[]
+    tab_sizepupilimage_corr_cross=[];
     for i=1:size(Matrice_taille_correct)
         sizepupilimage=cell2mat(Matrice_taille_correct(i));
         sizepupilimage=sizepupilimage(end-399:end);
@@ -89,7 +89,7 @@ end
 if face==1
     % face 
 
-    Matrice=buildDataTableSCT(SubjectCode,path,1)
+    Matrice=buildDataTableSCT(SubjectCode,path,1);
     
     Matrice_taille=Matrice{:,34};
 
@@ -122,15 +122,15 @@ if face==1
     moy_err=[];
     ecart_err=[];
     garde_err=[];
-    tab_sizepupilimage_err_cross=[]
+    tab_sizepupilimage_err_cross=[];
     for i=1:size(Matrice_taille_erreur)
         sizepupilimage=cell2mat(Matrice_taille_erreur(i));
         sizepupilimage=sizepupilimage(end-399:end);
         if sum(sizepupilimage==0)==0 && sum(sizepupilimage>=8000)==0
             garde_err=[garde_err;i];
             tab_sizepupilimage_err_cross=[tab_sizepupilimage_err_cross;sizepupilimage];
-            moy_err=[moy_err;mean(sizepupilimage)]
-            ecart_err=[ecart_err;std(sizepupilimage)]
+            moy_err=[moy_err;mean(sizepupilimage)];
+            ecart_err=[ecart_err;std(sizepupilimage)];
             x=size(sizepupilimage);
 
         end
@@ -143,15 +143,15 @@ if face==1
     moy_corr=[];
     ecart_corr=[];
     garde_corr=[];
-    tab_sizepupilimage_corr_cross=[]
+    tab_sizepupilimage_corr_cross=[];
     for i=1:size(Matrice_taille_correct)
         sizepupilimage=cell2mat(Matrice_taille_correct(i));
         sizepupilimage=sizepupilimage(end-399:end);
         if sum(sizepupilimage==0)==0 && sum(sizepupilimage>=8000)==0
             garde_corr=[garde_corr;i];
             tab_sizepupilimage_corr_cross=[tab_sizepupilimage_corr_cross;sizepupilimage];
-            moy_corr=[moy_corr;mean(sizepupilimage)]
-            ecart_corr=[ecart_corr;std(sizepupilimage)]
+            moy_corr=[moy_corr;mean(sizepupilimage)];
+            ecart_corr=[ecart_corr;std(sizepupilimage)];
             
             x=size(sizepupilimage);
         end
