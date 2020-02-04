@@ -118,7 +118,7 @@ for i=1:size(Matrice_correct_sur_image)
     hold on
 
 end
-title('differentes tailles de la pupille cas correct')
+title('differentes tailles de la pupille sur limage cas correct')
  moyenne_generale_correcte=mean(moyenne_correcte)
 
  
@@ -193,4 +193,78 @@ title('differentes tailles de la pupille pour ecran gris cas d erreur après trai
   p_mediane_ecran_gris=anova1 ([mediane_correcte_ecran_gris(1:length(mediane_erreur_ecran_gris))',mediane_erreur_ecran_gris'])
   title('Anova1 mediane pour cas correct/erreur pour ecran gris')
     
+  
+  
+   % -----------------------------------------------------------------------
+  %---------------------------------------------------------------------
+  % %Evolution de la taille de la pupille sur l'image pour 4 intervals
+  %--------------------------------------------------------------------
+  %----------------------------------------------------------------------
+  
+    
+%Evolution de la taille de la pupille pour les images
+
+k=1;
+i=100;
+l=1;
+
+
+
+for l=1:4
+    figure()
+    
+ %for j=k:(i*l)-1
+         for m=1:size(Matrice_correct_sur_image)
+   % for j=k:i*(size (Matrice_correct_sur_image)/4)
+    
+        moyenne_correcte_interval(l,m)=mean((Matrice_correct_sur_image{m,1}([k:(i*l)-1],1)));
+        plot(Matrice_correct_sur_image{m,1}([k:(i*l)-1],1))  
+        hold on
+        end
+
+    k=(i*l);
+    title(sprintf('differentes tailles de la pupille sur limage sur %d ème interval cas correct',l))
+    
+    %k=i*(size (Matrice_correct_sur_image)/4)+1;
+    %i=i+1;
+    %l=l+1
+     moyenne_generale_correcte_interval(l)=mean(moyenne_correcte_interval(l,m));
+     
+ end
+% 
+%  g = [1; 2; 3;4];
+%  
+%     boxplot( moyenne_generale_correcte_interval,g)
+%     xlabel('numero de l interval')
+%     ylabel('moyenne en nombre de pixel')
+%     title('moyenne sur les 4 intervals')
+%  
+
+
+% %Cas où l'experience n'est pas prise en compte(cas erreur)
+k=1;
+i=100;
+l=1;
+
+
+
+for l=1:4
+    figure()
+
+         for m=1:size(Matrice_erreur_sur_image)
+        moyenne_erreur_interval(l,m)=mean((Matrice_erreur_sur_image{m,1}([k:(i*l)-1],1)));
+        plot(Matrice_erreur_sur_image{m,1}([k:(i*l)-1],1))  
+        hold on
+        end
+
+    k=(i*l);
+    title(sprintf('differentes tailles de la pupille sur limage sur %d ème interval cas erreur',l))
+     moyenne_generale_erreur_interval(l)=mean(moyenne_erreur_interval(l,m));
+ end
+
+
+  
+%   % Analyses univariées : fonction anova1
+ p_sur_image_interval=anova1 ( moyenne_generale_erreur_interval, moyenne_generale_correcte_interval)
+    title('Anova1 pour les cas correct/erreur')
     
